@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'oscar.apps.shipping.apps.ShippingConfig',
     'oscar.apps.catalogue.apps.CatalogueConfig',
     'oscar.apps.catalogue.reviews.apps.CatalogueReviewsConfig',
-    'oscar.apps.communication.apps.CommunicationConfig',
+    # 'oscar.apps.communication.apps.python manage.py runserver',
     'oscar.apps.partner.apps.PartnerConfig',
     'oscar.apps.basket.apps.BasketConfig',
     'oscar.apps.payment.apps.PaymentConfig',
@@ -113,7 +113,7 @@ TEMPLATES = [
                 # Oscar requirements
                 'oscar.apps.search.context_processors.search_form',
                 'oscar.apps.checkout.context_processors.checkout',
-                'oscar.apps.communication.notifications.context_processors.notifications',
+                # 'oscar.apps.communication.notifications.context_processors.notifications',
                 'oscar.core.context_processors.metadata',
             ],
         },
