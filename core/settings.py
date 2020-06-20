@@ -48,8 +48,11 @@ INSTALLED_APPS = [
     'oscar.apps.shipping.apps.ShippingConfig',
     'oscar.apps.catalogue.apps.CatalogueConfig',
     'oscar.apps.catalogue.reviews.apps.CatalogueReviewsConfig',
-    # 'oscar.apps.communication.apps.python manage.py runserver',
-    'oscar.apps.partner.apps.PartnerConfig',
+
+    # Overridden oscar apps
+    # 'oscar.apps.partner.apps.PartnerConfig',
+    'apps.partner.apps.PartnerConfig',
+
     'oscar.apps.basket.apps.BasketConfig',
     'oscar.apps.payment.apps.PaymentConfig',
     'oscar.apps.offer.apps.OfferConfig',
@@ -79,8 +82,6 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'django_tables2',
 ]
-
-SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -113,7 +114,7 @@ TEMPLATES = [
                 # Oscar requirements
                 'oscar.apps.search.context_processors.search_form',
                 'oscar.apps.checkout.context_processors.checkout',
-                # 'oscar.apps.communication.notifications.context_processors.notifications',
+                'oscar.apps.customer.notifications.context_processors.notifications',
                 'oscar.core.context_processors.metadata',
             ],
         },
@@ -137,11 +138,6 @@ DATABASES = {
     }
 }
 
-AUTHENTICATION_BACKENDS = (
-    'oscar.apps.customer.auth_backends.EmailBackend',
-    'django.contrib.auth.backends.ModelBackend',
-)
-
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
@@ -160,12 +156,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
-    },
-}
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -183,3 +173,22 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+SITE_ID = 1
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+AUTHENTICATION_BACKENDS = (
+    'oscar.apps.customer.auth_backends.EmailBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
+    },
+}
