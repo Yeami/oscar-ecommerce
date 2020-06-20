@@ -78,6 +78,9 @@ INSTALLED_APPS = [
     'treebeard',
     'sorl.thumbnail',
     'django_tables2',
+
+    # Custom app
+    'api',
 ]
 
 SITE_ID = 1
@@ -96,7 +99,7 @@ MIDDLEWARE = [
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware'
 ]
 
-ROOT_URLCONF = 'api.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATES = [
     {
@@ -120,7 +123,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'api.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
