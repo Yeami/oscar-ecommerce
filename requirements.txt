@@ -13,6 +13,7 @@ phonenumbers==8.12.6
 Pillow==7.1.2
 psycopg2-binary==2.8.5
 purl==1.5
+pycountry==19.8.18
 python-dateutil==2.8.1
 pytz==2020.1
 six==1.15.0
