@@ -13,7 +13,7 @@ class Default(CoreDefault):
     depending on user partner group
     """
     product = None
-    partner = None
+    partners = None
 
     def select_stockrecord(self, product):
         self.product = product
@@ -23,17 +23,21 @@ class Default(CoreDefault):
             return None
 
     def get_product_for_auth_user(self):
-        self.partner = Partner.objects.filter(users=self.user.id)
+        self.partners = Partner.objects.filter(users=self.user.id)
 
-        return self.get_product_for_partner() if len(self.partner) else self.get_default_product()
+        return self.get_product_for_partner() if len(self.partners) else self.get_default_product()
 
     def get_product_for_partner(self):
-        product = self.get_partner_product(self.partner)
+        for partner in self.partners:
+            product = self.get_partner_product(partner)
 
-        return product[0] if len(product) else self.get_default_product()
+            if len(product):
+                return product[0]
+
+        return self.get_default_product()
 
     def get_partner_product(self, partner):
-        return self.product.stockrecords.filter(partner=partner[0])
+        return self.product.stockrecords.filter(partner=partner)
 
     def get_default_product(self):
         partner = Partner.objects.filter(code='default')[0]
